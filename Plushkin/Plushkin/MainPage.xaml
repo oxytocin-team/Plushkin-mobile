@@ -4,11 +4,57 @@
              xmlns:local="clr-namespace:Plushkin"
              x:Class="Plushkin.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <StackLayout
+        VerticalOptions="CenterAndExpand"
+        Margin="30, 0, 30, 0">
+        <Label x:Name="form" Text="PLUSHKIN" 
+               HorizontalOptions="CenterAndExpand"
+               FontSize="24"></Label>
+        <StackLayout  BackgroundColor="Gray">
 
+            <!--Tabs-->
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="signup" 
+                        HorizontalOptions="FillAndExpand" 
+                        Text="Sign up"
+                        IsEnabled="False"
+                        Clicked="Tab_Clicked"></Button>
+                <Button x:Name="signin"
+                        HorizontalOptions="FillAndExpand" 
+                        Text="Sign in"
+                        IsEnabled="True"
+                        Clicked="Tab_Clicked"></Button>
+            </StackLayout>
+
+            <StackLayout x:Name="formsignup"
+                         HorizontalOptions="FillAndExpand" 
+                         IsVisible="True">
+
+                <Entry x:Name="login_up" Placeholder="Login"></Entry>
+                <Entry x:Name="email" Placeholder="Email"></Entry>
+                <Entry x:Name="pass_up" Placeholder="Password" IsPassword="True"></Entry>
+                <Entry x:Name="r_pass" Placeholder="Reset password" IsPassword="True"></Entry>
+                <Button x:Name="go_up"
+                    HorizontalOptions="EndAndExpand" 
+                    Text="Go"
+                        Clicked="Go_up_Clicked"></Button>
+
+            </StackLayout>
+
+            <StackLayout x:Name="formsignin"
+                HorizontalOptions="FillAndExpand"
+                         IsVisible="False">
+
+                <Entry x:Name="login_in" Placeholder="Login"></Entry>
+                <Entry x:Name="pass_in" Placeholder="Password" IsPassword="True"></Entry>
+                <Label Text="Forgot your password?" TextDecorations="Underline"></Label>
+                <Button x:Name="go_in"
+                    HorizontalOptions="EndAndExpand" 
+                    Text="Go"
+                        Clicked="Go_in_Clicked"></Button>
+
+            </StackLayout>
+
+        </StackLayout>
+    </StackLayout>
 </ContentPage>
