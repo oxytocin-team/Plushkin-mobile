@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PlushkinForms.Views.AuthorizationPage"
+             xmlns:behaviour="clr-namespace:ValidationsXFSample.Helpers.Behaviours"
+             xmlns:converter="clr-namespace:ValidationsXFSample.Helpers.Converters" 
+             xmlns:viewmodels="clr-namespace:PlushkinForms.ViewModels" 
+             x:DataType="viewmodels:AuthorizationViewModel"
+             Visual="Material">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout  Padding="10,0,10,0" VerticalOptions="Center">
+            <StackLayout HorizontalOptions="Center" >
+                <Label Text="Plushkin" FontSize="80" FontFamily="{StaticResource RochesterFont}"/>
+            </StackLayout>
+            <StackLayout>
+                <StackLayout HorizontalOptions="Center" >
+                    <Label/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="{Binding Errors, Converter={StaticResource FirstValidationErrorConverter}}" Style="{StaticResource ErrorTextStyle}"/>
+                    <Entry Text="{Binding Email.Value}" Placeholder="Почта">
+                        <Entry.Behaviors>
+                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Email.IsValid}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Entry Text="{Binding Password.Value}" Placeholder="Пароль" IsPassword="True">
+                        <Entry.Behaviors>
+                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Password.IsValid}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Margin="0,0,0,30" TextColor="#000000" TextDecorations="Underline">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Забыл свой пароль ">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding PasswordRecoveryCommand}" />
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Button VerticalOptions="Center" Text="Войти" Command="{Binding LoginCommand}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="◀" Margin="0,30,0,0" TextColor="#000000"/>
+                    <Label Margin="0,30,0,0" TextColor="#000000" TextDecorations="Underline">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Хочу обратно">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ShowRegisterPageCommand}" />
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

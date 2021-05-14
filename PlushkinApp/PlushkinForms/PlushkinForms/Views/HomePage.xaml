@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             x:Class="PlushkinForms.Views.HomePage"
+             x:Name="MyPage"
+             Visual="Material">
+    <StackLayout>
+        <input:Dropdown Color="Black"
+                        ItemsSource="{Binding Menu}"
+                        SelectedItem="{Binding SelectedMenuItem, Mode=TwoWay}"
+                        PlaceholderColor="#000000"/>
+        <ListView ItemsSource="{Binding Bookmarks}"
+              SelectedItem="{Binding SelectedBookmark, Mode=TwoWay}" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Margin="15" Padding="8,8,8,15">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding siteName, StringFormat='https://www.google.com/s2/favicons?domain={0}'}" Scale="4" Margin="15,0"></Image>
+                                <Label Text="{Binding siteName}" FontSize="Medium"/>
+                                <Label Text="{Binding date}" FontSize="Small" VerticalOptions="Center" />
+                            </StackLayout>
+                            <Label Text="{Binding title}" FontSize="Medium" />
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <ImageButton Source="share_f.png" Command="{Binding Source={x:Reference MyPage}, Path=BindingContext.ShareBookmarkCommand}" CommandParameter="{Binding .}" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent" Margin="30,8,30,0"/>
+                                <ImageButton Source="heart_f.png" Command="{Binding Source={x:Reference MyPage}, Path=BindingContext.LikeBookmarkCommand}" CommandParameter="{Binding .}" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent" Margin="30,8,30,0"/>
+                                <ImageButton Source="trash_f.png" Command="{Binding Source={x:Reference MyPage}, Path=BindingContext.DeleteBookmarkCommand}" CommandParameter="{Binding .}" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent" Margin="30,8,30,0"/>
+                            </StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference MyPage}, Path=BindingContext.OpenUrlkCommand}" CommandParameter="{Binding url}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout IsVisible="{Binding IsBusy}"
+                    HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Padding="20">
+            <Label Text="Загрузка данных..." TextColor="Gray" HorizontalOptions="Center" />
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="Red" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:PlushkinForms.Views"
+       Title="PlushkinForms"
+       x:Class="PlushkinForms.AppShell">
+
+    <!--
+        The overall app visual hierarchy is defined here, along with navigation.
+    
+        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
+    -->
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+    
+
+    <TabBar>
+        <ShellContent Icon="user.png" Route="ProfilePage" ContentTemplate="{DataTemplate local:ProfilePage}" />
+        <ShellContent Icon="search.png" Route="SearchPage" ContentTemplate="{DataTemplate local:SearchPage}" />
+        <ShellContent Icon="home.png" Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}" />
+        <ShellContent Icon="collectibles.png" Route="CollectiblesPage" ContentTemplate="{DataTemplate local:CollectiblesPage}" />
+
+        <!--<ShellContent Title="About" Icon="icon_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Browse" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />-->
+    </TabBar>
+
+    <TabBar>
+        <ShellContent Route="RegisterPage" ContentTemplate="{DataTemplate local:RegisterPage}" />
+        <ShellContent Route="AuthorizationPage" ContentTemplate="{DataTemplate local:AuthorizationPage}" />
+        <ShellContent Route="PasswordRecoveryPage" ContentTemplate="{DataTemplate local:PasswordRecoveryPage}" />
+        <ShellContent Route="ChangePassworldPage" ContentTemplate="{DataTemplate local:ChangePassworldPage}" />
+    </TabBar>
+</Shell>
